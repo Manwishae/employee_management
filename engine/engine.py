@@ -4,7 +4,7 @@ cursor = db.cursor()
 
 ''' This file is related to database handling and management'''
 
-database_name = "employeebase"
+database_name = "TRADINGMANAGEMENT"
 
 def createDatabase():
     '''Creates database if doesnot exists'''
