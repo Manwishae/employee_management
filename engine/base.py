@@ -3,10 +3,10 @@ import mysql.connector as msc
 db = msc.connect(host="localhost",user="root",password="Himanshu@9506")
 cursor = db.cursor(buffered=True)
 
-database_name = "employeebase"
-table_name = "employees"
+database_name = "TRADINGMANAGEMENT"
+table_name = "TRADERS"
 
-columns = ["ID","Name","Age","Salary","Title"]
+columns = ["INVOICE NO","PARTY NAME","GSTIN","DESCRIPTION OF GOODS","AMOUNT"]
 
 def create_table():
     '''This functions creates a table of fixed size and columns'''
@@ -19,7 +19,7 @@ def create_table():
 
 
 def drop_table():
-    '''Drops the complete table employees'''
+    '''Drops the complete table TRADERS'''
     try:
         cursor.execute(f"drop table {table_name}")
         create_table()
@@ -43,21 +43,21 @@ def insert_values(values):
             string_values += f"\"{item}\""
         else:
             string_values += f", \"{item}\""
-    command = f"insert into employees values({string_values})"
+    command = f"insert into TRADERS values({string_values})"
     
     try:
         cursor.execute(command)
         db.commit()
-        print("\nEmployee Added \n")
+        print("\nTRADERS Added \n")
     
     except Exception as e:
         print(e)
 
 
 def select_specific_from_table(data):
-    '''Selects specific employee'''
+    '''Selects specific TRADERS'''
     try:
-        cursor.execute(f"select * from employees where ID = \"{data}\"")
+        cursor.execute(f"select * from TRADERS where ID = \"{data}\"")
         result = cursor.fetchall()
         return result
     
@@ -65,16 +65,16 @@ def select_specific_from_table(data):
         print(e)
 
 
-def drop_employee(empid):
+def drop_TRADERS(empid):
     try:
-        cursor.execute(f"delete from employees where ID = \"{empid}\"")
+        cursor.execute(f"delete from TRADERS where ID = \"{empid}\"")
         
     except Exception as e:
         print(e)
 
 try:
     cursor.execute(f"use {database_name}")
-    cursor.execute(f"desc employees")
+    cursor.execute(f"desc TRADERS")
 except Exception as e:
     if e.args[0] == 1049:
         cursor.execute(f"create database {database_name}")
