@@ -29,28 +29,28 @@ def window():
         buttonx.setStyleSheet(style)
         return buttonx
 
-    show = create_button("Show Employee",300,100,200,20)
-    add = create_button("Add Employee",300,100,200,140)
-    remove = create_button("Remove Employee",300,100,200,260)
+    show = create_button("Show TRADERS",300,100,200,20)
+    add = create_button("Add TRADERS",300,100,200,140)
+    remove = create_button("Remove TRADERS",300,100,200,260)
     showAll = create_button("Show all",300,100,200,380)
     removeAll = create_button("Remove all",300,100,200,500)
 
     #Creating popups
-    def showEmployee():
+    def showTRADERS():
         xdialog = QDialog(win)
-        xdialog.setWindowTitle("Add employee")
+        xdialog.setWindowTitle("Add TRADERS")
         dbInput = QLineEdit(xdialog)
-        dbInput.setPlaceholderText("Employee ID")
+        dbInput.setPlaceholderText("TRADERS ID")
         dbInput.setGeometry(100,10,300,100)
         dbInput.setStyleSheet("font-size:24px;")
         Buttonx = QPushButton(xdialog)
-        Buttonx.setText("Show employee")
+        Buttonx.setText("Show TRADERS")
         Buttonx.setGeometry(100,150,300,100)
         Buttonx.setStyleSheet(style)
 
         def showDatax():
             values = base.select_specific_from_table(dbInput.text())
-            data = tabulate(values,headers = ["ID","Name","Age","Salary","Title"],tablefmt='psql')
+            data = tabulate(values,headers = ["ID","PARTY_NAME","GSTIN","DESCRIPTION_OF_GOODS","AMOUNT"],tablefmt='psql')
             print(data)
             xdialog.close()
         
@@ -60,25 +60,25 @@ def window():
     
     def fshowAll():
         values = base.select_all_from_table()
-        data = tabulate(values,headers = ["ID","Name","Age","Salary","Title"],tablefmt='psql')
+        data = tabulate(values,headers = ["ID","PARTY_NAME","GSTIN","DESCRIPTION_OF_GOODS","AMOUNT"],tablefmt='psql')
         print(data)
         
     
     def removeOne():
         xdialog = QDialog(win)
-        xdialog.setWindowTitle("Remove employee")
+        xdialog.setWindowTitle("Remove TRADERS")
         dbInput = QLineEdit(xdialog)
-        dbInput.setPlaceholderText("Employee ID")
+        dbInput.setPlaceholderText("TRADERS ID")
         dbInput.setGeometry(100,10,300,100)
         dbInput.setStyleSheet("font-size:24px;")
         Buttonx = QPushButton(xdialog)
-        Buttonx.setText("Remove employee")
+        Buttonx.setText("Remove TRADERS")
         Buttonx.setGeometry(100,150,300,100)
         Buttonx.setStyleSheet(style)
 
         def showDatax():
-            base.drop_employee(dbInput.text())
-            print(f"Deleted Employee with ID {dbInput.text()}")
+            base.drop_TRADERS(dbInput.text())
+            print(f"Deleted TRADERS with ID {dbInput.text()}")
             xdialog.close()
         
         Buttonx.clicked.connect(showDatax)
@@ -87,7 +87,7 @@ def window():
 
     def addOne():
         vdialog = QDialog(win)
-        vdialog.setWindowTitle("Add employee")
+        vdialog.setWindowTitle("Add TRADERS")
 
         def create_inputs(title,xp,yp):
             dbInput = QLineEdit(vdialog)
@@ -96,14 +96,14 @@ def window():
             dbInput.setStyleSheet("font-size:24px;")
             return dbInput
         
-        empid = create_inputs("Employee Id",200,90)
-        name = create_inputs("Employee Name",200,200)
-        age = create_inputs("Employee Age",200,310)
-        salary = create_inputs("Employee Salary",200,420)
-        title = create_inputs("Employee Title",200,530)
+        tradersid = create_inputs("TRADERS Id",200,90)
+        name = create_inputs("TRADERS PARTY_NAME",200,200)
+        gstin = create_inputs("TRADERS GSTIN",200,310)
+        goods = create_inputs("TRADERS DESCRIPTION_OF_GOODS",200,420)
+        amount = create_inputs("TRADERS AMOUNT",200,530)
 
         def showData():
-            inputs = [empid,name,age,salary,title]
+            inputs = [tradersid,name,gstin,goods,amount]
             values = []
             for item in inputs:
                 values.append(item.text())
@@ -111,7 +111,7 @@ def window():
             vdialog.close()
         
         Buttonx = QPushButton(vdialog)
-        Buttonx.setText("Add employee")
+        Buttonx.setText("Add TRADERS")
         Buttonx.setGeometry(200,650,300,100)
         Buttonx.setStyleSheet(style)
         Buttonx.clicked.connect(showData)
@@ -121,7 +121,7 @@ def window():
     
     def fremoveAll():
         base.drop_table()
-        print("Deleted all employees")
+        print("Deleted all TRADERS")
     
 
     functions = [showEmployee,fshowAll,removeOne,addOne,fremoveAll]
